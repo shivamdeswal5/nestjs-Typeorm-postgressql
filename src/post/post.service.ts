@@ -28,6 +28,7 @@ export class PostService {
         post.tags = postData.tags;
         post.user = user;
         return await this.postReposistory.save(post)
+   
     }
 
     async findPost(id:number){
