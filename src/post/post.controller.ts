@@ -11,9 +11,9 @@ export class PostController {
         return this.postService.findAllPosts();
     }
 
-    @Post()
-    createPost(@Body() post:PostDto){
-        return this.postService.createPost(post);
+    @Post(':id')
+    createPost(@Body() post:PostDto, @Param('id') id: string){
+        return this.postService.createPost(post,+id);
     }
 
     @Patch(':id')
