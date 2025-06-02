@@ -16,8 +16,7 @@ export class Company {
   @Column({ type: 'varchar', length: 40, unique: true })
   email: string;
  
-  @ManyToMany(()=> User, (user)=>user.companies)
+  @ManyToMany(()=> User, (user)=>user.companies , {onDelete:'CASCADE', onUpdate:'CASCADE'})
   @JoinTable()
-  users: User[]
-    company: User;
+  users: User[];
 } 

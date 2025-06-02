@@ -2,7 +2,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsString,
-  MinLength,
+  MinLength
 } from 'class-validator';
 
 
@@ -19,7 +19,5 @@ export class CompanyDto {
   @IsNotEmpty()
   @IsEmail({}, { message: 'Please provide valid Email.' })
   email: string;
-
-
 
 }

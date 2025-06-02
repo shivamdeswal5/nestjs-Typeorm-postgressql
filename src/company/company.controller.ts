@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CompanyDto } from './dto/company.dto';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 
 @Controller('company')
@@ -28,8 +29,19 @@ export class CompanyController {
         return this.companyService.createCompany2(companyData); 
     }
 
-    @Post(':userId/:companyId')
-    addUserToCompany( @Param('userId') userId: string, @Param('companyId') companyId: string){ 
-        return this.companyService.addUserToCompany(+userId,+companyId); 
+   @Patch(':id')
+    addUserToCompany( @Param('id') id: string,  @Body() userData: CreateUserDto ,){ 
+        return this.companyService.addUserToCompany(+id,userData); 
     }
+
+    @Delete(':id')
+        remove(@Param('id') id: string) {
+        return this.companyService.deleteCompany(+id)
+    }
+
+    @Patch(':id')
+     update(@Param('id') id: string, @Body() updateCompany: CompanyDto) {
+        return this.companyService.updateCompany(+id, updateCompany);
+    }
+    
 }

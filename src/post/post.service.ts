@@ -47,12 +47,13 @@ export class PostService {
     }
 
     async updatePost(id: number, updatedData: PostDto){
-        const user = await this.postReposistory.findOneBy({id});
-        if(!user){
+        const post = await this.postReposistory.findOneBy({id});
+        if(!post){
           throw new NotFoundException('Post Not found')
         }else{
-          await this.postReposistory.update({id}, updatedData);
+          return await this.postReposistory.update({id}, updatedData);
         }
     
       }
+
   }
