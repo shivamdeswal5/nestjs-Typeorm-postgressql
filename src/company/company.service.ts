@@ -93,33 +93,39 @@ export class CompanyService {
         const querryRunner = this.dataSource.createQueryRunner();
         await querryRunner.connect();
         await querryRunner.startTransaction();
+
         try{
+
             const user : User = new User();
-        user.age = userData.age;
-        user.email = userData.email;
-        user.gender = userData.gender;
-        user.name = userData.name;
-        user.password = userData.password;
-        user.username = userData.username;
+            user.age = userData.age;
+            user.email = userData.email;
+            user.gender = userData.gender;
+            user.name = userData.name;
+            user.password = userData.password;
+            user.username = userData.username;
 
-        await querryRunner.manager.save(user);
-        console.log("user: ",user);
-         const company = await querryRunner.manager.findOneBy(Company,{ id: companyId });
-            if (!company) {
-            throw new NotFoundException(`Company with id ${companyId} not found`);
-        }
-
-        console.log("Company: ",company)  
-        company.users = [user];
-        // company.users.push(user);
-        await querryRunner.commitTransaction();
-        return company;    
-        }catch(e){
-            await querryRunner.rollbackTransaction();
-            throw e;
-        } finally{
-            await querryRunner.release();
-        }
+            await querryRunner.manager.save(user);
+            console.log("user: ",user);
+            const user1 = await querryRunner.manager.findOneBy(User,{id:1})
+            const company = await querryRunner.manager.findOneBy(Company,{ id: companyId });
+                if (!company) {
+                throw new NotFoundException(`Company with id ${companyId} not found`);
+            }
+            if (!user1) {
+                throw new NotFoundException(`User with id 1 not found`);
+            }
+            console.log("Searched Company: ",company);
+            company.users = [user, user1];
+            // company.users.push(user);
+            // await querryRunner.manager.update(Company,{id:companyId},company);
+            await querryRunner.commitTransaction();
+            return company;    
+            }catch(e){
+                await querryRunner.rollbackTransaction();
+                throw e;
+            } finally{
+                await querryRunner.release();
+            }
       }
 
       async deleteCompany(id:number){
