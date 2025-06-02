@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { PostService } from './post.service';
 import { PostDto } from './dto/post-dto';
 
@@ -7,8 +7,13 @@ export class PostController {
     constructor(private postService: PostService){}
 
     @Get()
-    getAllPosts(){
-        return this.postService.findAllPosts();
+    // getAllPosts(){
+    //     return this.postService.findAllPosts();
+    // }
+
+    @Get()
+    findPost(@Query('title') title: string){
+      return this.postService.findPosts(title);
     }
 
     @Post(':id')

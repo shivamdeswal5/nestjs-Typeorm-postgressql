@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './entities/post.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { PostDto } from './dto/post-dto';
 
 @Injectable()
@@ -12,9 +12,16 @@ export class PostService {
         @InjectRepository(User) private userRepository: Repository<User>,
     ){}
 
-    async findAllPosts(){
-        return await this.postReposistory.find();
-    }
+    // async findAllPosts(){
+    //     return await this.postReposistory.find();
+    // }
+
+     async findPosts(title: string) {
+        const conditions: FindOptionsWhere<Post> = { title };
+        return this.postReposistory.find({
+            where: conditions,
+        });
+      }
 
     async createPost(postData:PostDto,id:number){
         const user = await this.userRepository.findOne({ where: { id: id } });

@@ -21,9 +21,25 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  async findAllUser(){
-    return await this.userRepository.find();
-  }
+  // async findAllUser(){
+  //   return await this.userRepository.find();
+  // }
+  
+  async findAllUser(page: number, limit: number) {
+  const skip = (page - 1) * limit;
+
+  const [data, total] = await this.userRepository.findAndCount({
+    skip,
+    take: limit,
+  });
+
+  return {
+    data,
+    total,
+    page,
+    lastPage: Math.ceil(total / limit),
+  };
+}
 
   async viewUser(id: number) {
     return await this.userRepository.findOneBy({ id });

@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -20,9 +21,14 @@ import { CreateUserDto } from './dto/create-user.dto';
     return this.userService.createUser(createUserDto);
   }
 
+  // @Get()
+  // findAll() {
+  //   return this.userService.findAllUser();
+  // }
+
   @Get()
-  findAll() {
-    return this.userService.findAllUser();
+  findAll(@Query('page') page = 1, @Query('limit') limit = 10) {
+    return this.userService.findAllUser(+page, +limit);
   }
 
   @Get(':id')
