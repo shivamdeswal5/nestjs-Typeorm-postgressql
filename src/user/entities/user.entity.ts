@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Post } from 'src/post/entities/post.entity';
+import { Company } from 'src/company/entities/company.entity';
 @Entity()
 export class User {
 
@@ -24,6 +25,9 @@ export class User {
   @Column({ type: 'enum', enum: ['m', 'f', 'u'] })
   gender: string;
 
-   @OneToMany(() => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.user)
     posts: Post[]
+
+  @ManyToMany(()=>Company,(company)=>company.users,  { onDelete: 'CASCADE' , onUpdate: 'CASCADE'})
+  companies: Company[]
 }

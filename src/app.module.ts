@@ -7,6 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './user/entities/user.entity';
 import { PostModule } from './post/post.module';
 import { Post } from './post/entities/post.entity';
+import { CompanyModule } from './company/company.module';
+import { Company } from './company/entities/company.entity';
 
 
 @Module({
@@ -21,13 +23,14 @@ import { Post } from './post/entities/post.entity';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [User,Post],
+        entities: [User,Post,Company],
         synchronize: true
       }),
       inject: [ConfigService],
     }),
     UserModule,
-    PostModule
+    PostModule,
+    CompanyModule
   ],
   controllers: [AppController],
   providers: [AppService],
