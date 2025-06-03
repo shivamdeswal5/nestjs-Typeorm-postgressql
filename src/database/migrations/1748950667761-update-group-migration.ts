@@ -7,7 +7,7 @@ export class UpdateUserTransaction1748950667761 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DROP TABLE "group"`);
+        await queryRunner.query(`ALTER TABLE "group" ADD COLUMN "ceo"`);
     }
 
 }
