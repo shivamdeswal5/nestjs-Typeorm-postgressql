@@ -24,7 +24,8 @@ import { Company } from './company/entities/company.entity';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
         entities: [User,Post,Company],
-        synchronize: true
+        synchronize: false,
+        autoLoadEntities: true
       }),
       inject: [ConfigService],
     }),
