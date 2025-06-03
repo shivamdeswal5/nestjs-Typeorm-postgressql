@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
+import { Group } from 'src/group/enitites/group.entity';
 config();
 
 const configService = new ConfigService();
@@ -14,7 +15,7 @@ const AppDataSource = new DataSource({
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_DATABASE'),
   synchronize: false,
-  entities: ['**/*.entity.ts'],
+  entities: [Group],
   migrations: ['src/database/migrations/*-migration.ts'],
   migrationsRun: false,
   logging: true,
