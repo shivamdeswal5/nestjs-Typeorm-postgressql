@@ -7,16 +7,16 @@ export class Company {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ type: 'varchar', length: 30, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', length: 15 })
+  @Column({ type: 'varchar', length: 15 , nullable: false})
   ceo: string;
 
-  @Column({ type: 'varchar', length: 40, unique: true })
+  @Column({ type: 'varchar', length: 40, unique: true ,  nullable: false})
   email: string;
  
-  @ManyToMany(()=> User, (user)=>user.companies , {onDelete:'CASCADE', onUpdate:'CASCADE'})
+  @ManyToMany(()=> User, (user)=>user.companies , {onDelete:'CASCADE', onUpdate:'CASCADE', nullable: false})
   @JoinTable()
   users: User[];
 } 

@@ -25,9 +25,9 @@ export class User {
   @Column({ type: 'enum', enum: ['m', 'f', 'u'], nullable:false })
   gender: string;
 
-  @OneToMany(() => Post, (post) => post.user)
-    posts: Post[]
+  @OneToMany(() => Post, (post) => post.user,{ nullable: false})
+  posts: Post[]
 
-  @ManyToMany(()=>Company,(company)=>company.users,  { onDelete: 'CASCADE' , onUpdate: 'CASCADE'})
+  @ManyToMany(()=>Company,(company)=>company.users,  { onDelete: 'CASCADE' , onUpdate: 'CASCADE', nullable: false})
   companies: Company[]
 }
