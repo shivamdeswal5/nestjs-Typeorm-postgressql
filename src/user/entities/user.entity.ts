@@ -7,22 +7,22 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ type: 'varchar', length: 30, nullable:false })
   name: string;
 
-  @Column({ type: 'varchar', length: 15 })
+  @Column({ type: 'varchar', length: 15 , nullable:false})
   username: string;
 
-  @Column({ type: 'varchar', length: 40, unique: true })
+  @Column({ type: 'varchar', length: 40, unique: true, nullable:false })
   email: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable:false })
   age: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar',nullable:false  })
   password: string;
 
-  @Column({ type: 'enum', enum: ['m', 'f', 'u'] })
+  @Column({ type: 'enum', enum: ['m', 'f', 'u'], nullable:false })
   gender: string;
 
   @OneToMany(() => Post, (post) => post.user)
