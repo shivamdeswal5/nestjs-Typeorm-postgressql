@@ -3,7 +3,6 @@ import { CompanyService } from './company.service';
 import { CompanyDto } from './dto/company.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
-
 @Controller('company')
 export class CompanyController {
     constructor(
@@ -22,12 +21,6 @@ export class CompanyController {
         return this.companyService.createCompany(companyData,+id); 
     }
 
-    @Post()
-    createComapny2(@Body() companyData: CompanyDto){
-        console.log("Company Data");
-        console.log(companyData)  
-        return this.companyService.createCompany2(companyData); 
-    }
 
    @Patch(':id')
     addUserToCompany( @Param('id') id: string,  @Body() userData: CreateUserDto ,){ 
