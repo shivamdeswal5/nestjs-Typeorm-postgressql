@@ -9,6 +9,7 @@ import { PostModule } from './post/post.module';
 import { Post } from './post/entities/post.entity';
 import { CompanyModule } from './company/company.module';
 import { Company } from './company/entities/company.entity';
+import { Group } from './group/enitites/group.entity';
 
 
 @Module({
@@ -23,7 +24,7 @@ import { Company } from './company/entities/company.entity';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [User,Post,Company],
+        entities: [User,Post,Company,Group],
         synchronize: false,
         autoLoadEntities: true
       }),

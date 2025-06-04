@@ -1,7 +1,11 @@
 import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
-import { Group } from 'src/group/enitites/group.entity';
+import { Company } from '../company/entities/company.entity';
+import { Group } from '../group/enitites/group.entity';
+import { User } from '../user/entities/user.entity';
+import { Post } from '../post/entities/post.entity';
+
 config();
 
 const configService = new ConfigService();
@@ -15,10 +19,10 @@ const AppDataSource = new DataSource({
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_DATABASE'),
   synchronize: false,
-  entities: [Group],
+  entities: [Group,Company,User,Post],
   migrations: ['src/database/migrations/*-migration.ts'],
   migrationsRun: false,
   logging: true,
 });
-
+ 
 export default AppDataSource;
